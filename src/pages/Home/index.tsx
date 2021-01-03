@@ -2,7 +2,7 @@ import React from 'react';
 import { Title } from 'components/Typography/Title';
 import Card from 'components/Card';
 
-const Home = () => {
+export const Home = () => {
   return (
     <>
       <div className="container">
@@ -27,5 +27,3 @@ const Home = () => {
     </>
   );
 };
-
-export default Home;
