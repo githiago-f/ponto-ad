@@ -7,8 +7,10 @@
     },
     "version": "0.2.0",
     "private": true,
-    "homepage": "/Azure-AD",
+    "homepage": "/ponto-ad",
     "dependencies": {
+        "@azure/msal-browser": "^2.8.0",
+        "@azure/msal-react": "^1.0.0-alpha.1",
         "react": "^16.13.1",
         "react-dom": "^16.13.1",
         "react-router-dom": "^5.2.0",
