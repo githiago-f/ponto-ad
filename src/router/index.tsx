@@ -1,18 +1,20 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { 
-  BrowserRouter as Router,
-  Route
+  BrowserRouter as Router
 } from 'react-router-dom';
-import { Landing } from 'pages/Landing';
-import { useAccessAd } from 'use-cases/access-ad';
+import { useAccessAd } from 'utils/access-ad';
+import { AzureAdContext } from 'utils/ad-context';
+import { useAuth } from './auth.hooks';
 
 export const BaseRoutes = () => {
-  const {auth} = useAccessAd();
+  const azureAd = useAccessAd();
+  const {Routes} = useAuth(azureAd);
 
   return (
     <Router basename={require('./../../package.json').homepage}>
-      {auth.accessToken ? 'Authenticated' : 'Not authenticated'}
-      <Route exact path="/" component={Landing} />
+      <AzureAdContext.Provider value={azureAd}>
+        {Routes}
+      </AzureAdContext.Provider>
     </Router>
   );
 };

@@ -1,7 +1,7 @@
 import * as msal from '@azure/msal-browser';
-import { useIsAuthenticated, useMsal } from '@azure/msal-react';
+import { useMsal } from '@azure/msal-react';
 import { AzureAD } from 'config/ad.config';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
 export const useAccessAd = () => {
   const [authResult, setAuthResult] = useState({} as msal.AuthenticationResult);
@@ -10,6 +10,16 @@ export const useAccessAd = () => {
   msalHook.instance = new msal.PublicClientApplication(AzureAD);
 
   useEffect(() => {
+    const first = msalHook.instance.getAllAccounts().shift();
+    if(first) {
+      msalHook.instance.acquireTokenSilent({
+        scopes: ['User.Read'],
+        account: first as msal.AccountInfo
+      }).then(setAuthResult);
+    }
+  }, []);
+
+  const login = useCallback(() => {
     msalHook.instance.loginPopup({
       scopes: ['User.Read']
     })
@@ -18,6 +28,8 @@ export const useAccessAd = () => {
   }, []);
 
   return {
-    auth: authResult
+    auth: authResult,
+    msal: msalHook,
+    login
   };
 };

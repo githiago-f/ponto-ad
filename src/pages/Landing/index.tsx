@@ -1,11 +1,12 @@
-import React from 'react'
+import React, { useContext } from 'react';
+import { LoginNavBar } from 'components/NavBar';
+import { AzureAdContext } from 'utils/ad-context';
 
 export const Landing = () => {
+  const ctx = useContext(AzureAdContext);
   return (
     <div>
-      <nav>
-        
-      </nav>
+      <LoginNavBar loginAction={ctx.login}/>
     </div>
-  )
-}
+  );
+};

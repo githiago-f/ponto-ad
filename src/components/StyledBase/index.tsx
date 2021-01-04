@@ -10,8 +10,8 @@ export const StyledBase = createGlobalStyle`
     --light-font-color: #000;
     --dark-font-color: #fff;
 
-    --font-color: var(--dark-font-color);
-    --bg-color: var(--dark-bg-color);
+    --font-color: var(--light-font-color);
+    --bg-color: var(----light-bg-color);
   }
 
   * {
@@ -24,14 +24,5 @@ export const StyledBase = createGlobalStyle`
     font-family: 'Roboto', Arial, 'Helvetica Neue', sans-serif;
     background-color: var(--bg-color);
     color: var(--font-color);
-  }
-
-  p {
-    font-size: calc(1rem + .5vw);
-  }
-
-  .container {
-    max-width: 700px;
-    margin: auto;
   }
 `;
