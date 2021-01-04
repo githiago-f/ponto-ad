@@ -1,17 +1,18 @@
 import React from 'react';
-import { Link, Layer } from '@fluentui/react';
+import { Layer } from '@fluentui/react';
 import { NavContainer } from './styles';
+import { Link } from 'react-router-dom';
 
 export const LoginNavBar = (props: {loginAction:()=>void}) => {
   return (
     <Layer hostId={''}>
       <NavContainer>
         <div>
-          <Link href={'/'} className="logo">Pontto</Link>
+          <Link to={'/'} className="logo">Pontto</Link>
         </div>
         <div>
           <Link 
-            href={'#'} 
+            to={'#'} 
             onClick={props.loginAction}
           >Entrar</Link>
         </div>

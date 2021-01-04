@@ -20,7 +20,7 @@ export const LogoutNavBar = (props: {logoutAction:()=>void}) => {
       <NavContainer>
         <div>
           <Link to={'/'} className="logo">
-            <img height="32" src={'https://shareprime.com.br/layout/shareprime-logo.png'} />
+            <img height="32" src={require('./../../assets/images/sharePrime-logo.png')} />
           </Link>
         </div>
         <div>
