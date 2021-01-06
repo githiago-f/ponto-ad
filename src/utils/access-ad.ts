@@ -14,7 +14,7 @@ export const useAccessAd = () => {
     if(first) {
       msalHook.instance.acquireTokenSilent({
         scopes: ['User.Read'],
-        account: first as msal.AccountInfo
+        account: first
       }).then(setAuthResult);
     }
   }, []);

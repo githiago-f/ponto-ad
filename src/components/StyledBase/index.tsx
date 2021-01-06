@@ -4,7 +4,7 @@ export const StyledBase = createGlobalStyle`
   @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,700;1,400&display=swap');
 
   :root {
-    --dark-bg-color: #4f5659;
+    --dark-bg-color: #383737;
     --light-bg-color: #f2f2f2;
 
     --light-font-color: #000;
@@ -24,5 +24,9 @@ export const StyledBase = createGlobalStyle`
     font-family: 'Roboto', Arial, 'Helvetica Neue', sans-serif;
     background-color: var(--bg-color);
     color: var(--font-color);
+  }
+
+  .container {
+    padding-top: 64px;
   }
 `;
