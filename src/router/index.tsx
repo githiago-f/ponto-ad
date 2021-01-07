@@ -2,12 +2,12 @@ import React from 'react';
 import { 
   BrowserRouter as Router
 } from 'react-router-dom';
-import { useAccessAd } from 'utils/access-ad';
-import { AzureAdContext } from 'utils/ad-context';
+import { useAzureAd } from 'utils/useAzureAd';
+import { AzureAdContext } from 'utils/AzureAdContext';
 import { useAuth } from './auth.hooks';
 
 export const BaseRoutes = () => {
-  const azureAd = useAccessAd();
+  const azureAd = useAzureAd();
   const {Routes} = useAuth(azureAd);
 
   return (

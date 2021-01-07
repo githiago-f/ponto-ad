@@ -12,6 +12,7 @@
         "@azure/msal-browser": "^2.8.0",
         "@azure/msal-react": "^1.0.0-alpha.1",
         "@fluentui/react": "^7.155.3",
+        "dayjs": "^1.10.2",
         "react": "^16.13.1",
         "react-dom": "^16.13.1",
         "react-router-dom": "^5.2.0",

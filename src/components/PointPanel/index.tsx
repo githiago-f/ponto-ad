@@ -1,8 +1,11 @@
 import React from 'react';
 import { PrimaryButton } from '@fluentui/react';
-import { ControlPanel, MapPanel, MapPanelWrapper, Panel } from './styles';
+import {  MapPanel, MapPanelWrapper, Panel, TimerSubtitle, TimerTitle, ControlPanel } from './styles';
+import { useCurrentTime } from 'utils/useCurrentTime';
 
 export const PointPanel = () => {
+  const { time } = useCurrentTime();
+
   return (
     <Panel>
       <MapPanelWrapper>
@@ -12,13 +15,14 @@ export const PointPanel = () => {
           }
         </MapPanel>
         <ControlPanel>
-          <span>Entrada $horario</span>
-          <h4>{new Date().toISOString()}</h4>
+          <TimerSubtitle>Entrada $horario</TimerSubtitle>
+          <TimerTitle>{time}</TimerTitle>
         </ControlPanel>
       </MapPanelWrapper>
       <PrimaryButton
         text="Nova Inclusão"
         onClick={() => {}}
+        className="full-width"
       />
     </Panel>
   );

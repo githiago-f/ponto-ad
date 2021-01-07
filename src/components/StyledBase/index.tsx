@@ -29,4 +29,8 @@ export const StyledBase = createGlobalStyle`
   .container {
     padding-top: 64px;
   }
+  
+  .full-width {
+    width: 100%;
+  }
 `;

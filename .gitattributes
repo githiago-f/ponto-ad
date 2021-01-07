@@ -1,1 +1,1 @@
-*.ts eol=lf text=auto
+*.{ts, tsx, jsx, js} eol=lf text=auto

@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { Title } from 'components/Typography/Title';
-import { AzureAdContext } from 'utils/ad-context';
+import { AzureAdContext } from 'utils/AzureAdContext';
 import { LogoutNavBar } from 'components/NavBar';
 import { Stack } from '@fluentui/react';
 import { PointPanel } from 'components/PointPanel';
@@ -12,7 +12,6 @@ export const Home = () => {
     <>
       <div className="container">
         <LogoutNavBar logoutAction={() => ctx.msal.instance.logout()} />
-
         <Title>Bem vindo, {ctx.auth.account?.name}</Title>
         <div className="ms-Grid">
           <Stack className="ms-Grid-Row">
