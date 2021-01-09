@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/ponto-ad/precache-manifest.cc15ba09e72e8cd47fd7b036387652fa.js"
+  "/ponto-ad/precache-manifest.2800c67a4ec89c06b17385eba8ded865.js"
 );
 
 self.addEventListener('message', (event) => {
