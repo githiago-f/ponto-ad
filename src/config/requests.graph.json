@@ -1,22 +1,22 @@
 {
   "getUserInfos": {
-    "url": "https://graph.microsoft.com/v1.0/$batch",
+    "url": "/$batch",
     "body": {
       "requests": [
         {
           "url": "me/photo/$value",
           "method": "GET",
-          "id": "1"
+          "id": "photo"
         },
         {
           "url": "me/events?$top=5",
           "method": "GET",
-          "id": "2"
+          "id": "events"
         },
         {
           "url": "me/messages?$top=5&$select=webLink,subject,hasAttachments,bodyPreview",
           "method": "GET",
-          "id": "3"
+          "id": "messages"
         }
       ]
     }

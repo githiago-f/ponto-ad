@@ -1,37 +1,33 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext } from 'react';
 import { Layer, Persona, PersonaSize, Link as FluentLink } from '@fluentui/react';
 import { NavContainer } from './styles';
-import { AzureAdContext } from 'utils/AzureAdContext';
-import { getPhoto } from 'utils/get-photo';
+import { AzureContext } from 'services/azure-service';
 import { Link } from 'react-router-dom';
 
-export const LogoutNavBar = (props: {logoutAction:()=>void}) => {
-  const ctx = useContext(AzureAdContext);
-  const [photo, setPhoto] = useState('');
-
-  useEffect(() => {
-    if(photo.trim().length === 0) {
-      getPhoto(ctx.auth.accessToken)
-        .then(setPhoto)
-        .catch(console.error);
-    }
-  }, [ctx.auth.accessToken, photo]);
+export const LogoutNavBar = () => {
+  const {auth, logout} = useContext(AzureContext);
 
   return (
     <Layer hostId="">
       <NavContainer>
         <div>
           <Link to="/" className="logo">
-            <img height="32" alt="logo" src={require('./../../assets/images/sharePrime-logo.png')} />
+            <img 
+              height="32"
+              alt="logo"
+              src={require('./../../assets/images/sharePrime-logo.png')}
+              loading={'lazy'}
+            />
           </Link>
         </div>
         <div>
           <Persona
-            text={ctx.auth.account?.name}
+            text={auth?.account?.name}
             size={PersonaSize.size32}
-            imageUrl={photo}
+            imageUrl={''}
+            imageAlt={auth?.account?.username}
           />
-          <FluentLink onClick={props.logoutAction}>
+          <FluentLink onClick={logout}>
             Sair
           </FluentLink>
         </div>

@@ -2,14 +2,17 @@ import React, { useMemo } from 'react';
 import { Landing } from 'pages/Landing';
 import { Home } from 'pages/Home';
 import { Route, Switch } from 'react-router-dom';
-import { TAzureHook } from '@dataTypes/Azure';
+import {Context} from 'services/azure-service';
+import { LocalUserContext } from 'utils/graph.api';
 
-export const useAuth = (azureAd: TAzureHook) => {
+export const useAuth = (azureAd: Context, userData: any) => {
   const Routes = useMemo(() => {
-    if(azureAd.auth.accessToken) {
+    if(azureAd?.auth?.accessToken) {
       return (
         <Switch>
-          <Route exact path="/" component={Home} />
+          <LocalUserContext.Provider value={userData}>
+            <Route exact path="/" component={Home} />
+          </LocalUserContext.Provider>
         </Switch>
       );
     } else {
