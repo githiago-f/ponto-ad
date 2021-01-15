@@ -20,7 +20,7 @@ export const useAuth = (azureAd: Context, userData: any) => {
         <Route exact path="/" component={Landing} />
       );
     }
-  }, [azureAd]);
+  }, [azureAd, userData]);
 
   return {
     Routes
