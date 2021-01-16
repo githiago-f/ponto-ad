@@ -7,7 +7,7 @@ export const PointPanel = () => {
   const { time } = useCurrentTime();
 
   return (
-    <Panel>
+    <Panel className="ms-depth-8">
       <MapPanelWrapper>
         <MapPanel>
           {

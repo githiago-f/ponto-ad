@@ -15,7 +15,8 @@ export const LogoutNavBar = () => {
         <div>
           <Link to="/" className="logo">
             <img 
-              height="32"
+              width="108"
+              height="auto"
               alt="logo"
               src={require('./../../assets/images/sharePrime-logo.png')}
               loading={'lazy'}
@@ -29,7 +30,10 @@ export const LogoutNavBar = () => {
             imageUrl={photo}
             imageAlt={auth?.account?.username}
           />
-          <FluentLink onClick={logout}>
+          <FluentLink
+            styles={{root:{padding: '0px 15px'}}}
+            onClick={logout}
+          >
             Sair
           </FluentLink>
         </div>

@@ -5,7 +5,7 @@ export const NavContainer = styled.nav`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  padding: 1rem 1.5rem;
+  padding: .8rem 1.5rem;
   font-size: 1rem;
   & .logo {
     font-size: 1.3rem;

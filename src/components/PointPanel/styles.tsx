@@ -1,16 +1,18 @@
 import styled from 'styled-components';
 
 export const Panel = styled.div`
-  max-width: 280px;
+  width: 100%;
   background-color: var(--bg-color);
   padding: 15px;
+  margin-top: 15px;
 `;
 
 export const MapPanelWrapper = styled.div`
+  margin-bottom: 15px;
 `;
 
 export const MapPanel = styled.div`
-  min-height: 150px;
+  min-height: 70vh;
   width: 100%;
 `;
 
