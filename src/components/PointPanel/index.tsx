@@ -4,7 +4,7 @@ import {  MapPanel, MapPanelWrapper, Panel, TimerSubtitle, TimerTitle, ControlPa
 import { useCurrentTime } from 'utils/useCurrentTime';
 
 export const PointPanel = () => {
-  const { time } = useCurrentTime();
+  const { currentTime } = useCurrentTime();
 
   return (
     <Panel className="ms-depth-8">
@@ -16,7 +16,7 @@ export const PointPanel = () => {
         </MapPanel>
         <ControlPanel>
           <TimerSubtitle>Entrada $horario</TimerSubtitle>
-          <TimerTitle>{time}</TimerTitle>
+          <TimerTitle>{currentTime}</TimerTitle>
         </ControlPanel>
       </MapPanelWrapper>
       <PrimaryButton

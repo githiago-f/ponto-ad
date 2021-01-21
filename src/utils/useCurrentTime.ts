@@ -2,16 +2,17 @@ import dayjs from 'dayjs';
 import { useEffect, useState } from 'react';
 
 export const useCurrentTime = () => {
-  const [ time, setTime ] = useState('');
+  const [ currentTime, setTime ] = useState(dayjs().format('DD/MM/YYYY HH:mm:ss'));
 
   useEffect(() => {
-    setTimeout(() => {
-      const date = dayjs().format('DD/MM/YYYY HH:mm:ss');
-      setTime(date);
+    setInterval(() => {
+      const formattedDate = dayjs()
+        .format('DD/MM/YYYY HH:mm:ss');
+      setTime(formattedDate);
     }, 1000);
-  }, [time]);
+  }, []);
 
   return {
-    time
+    currentTime
   };
 };

@@ -2,7 +2,7 @@ import { createContext, useEffect, useState } from 'react';
 import { CalendarEvent, Message } from '@data/MSGraph';
 import { graphConfig } from 'config';
 import { GraphService } from 'services/graph-service';
-import { objectifyBatchResponse } from './objectifyBatchResponse';
+import { objectifyBatchResponse } from 'utils/objectifyBatchResponse';
 
 export const useLocalUserData = (token: string | undefined) => {
   const [messages, setMessages] = useState([] as Message[]);

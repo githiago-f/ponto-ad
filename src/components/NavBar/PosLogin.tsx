@@ -1,9 +1,9 @@
 import React, { useContext } from 'react';
 import { Layer, Persona, PersonaSize, Link as FluentLink } from '@fluentui/react';
 import { NavContainer } from './styles';
-import { AzureContext } from 'services/azure-service';
+import { AzureContext } from 'contexts/azure-ad-context';
 import { Link } from 'react-router-dom';
-import { LocalUserContext } from 'utils/graph.api';
+import { LocalUserContext } from 'contexts/local-user-context';
 
 export const LogoutNavBar = () => {
   const {auth, logout} = useContext(AzureContext);

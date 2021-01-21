@@ -2,8 +2,8 @@ import React, { useMemo } from 'react';
 import { Landing } from 'pages/Landing';
 import { Home } from 'pages/Home';
 import { Route, Switch } from 'react-router-dom';
-import {Context} from 'services/azure-service';
-import { LocalUserContext } from 'utils/graph.api';
+import {Context} from 'contexts/azure-ad-context';
+import { LocalUserContext } from 'contexts/local-user-context';
 
 export const useAuth = (azureAd: Context, userData: any) => {
   const Routes = useMemo(() => {

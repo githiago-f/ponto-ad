@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import { Layer } from '@fluentui/react';
 import { NavContainer } from './styles';
 import { Link } from 'react-router-dom';
-import { AzureContext } from 'services/azure-service';
+import { AzureContext } from 'contexts/azure-ad-context';
 
 export const LoginNavBar = () => {
   const {login} = useContext(AzureContext);
