@@ -1,19 +1,19 @@
 {
   "files": {
-    "main.js": "/ponto-ad/static/js/main.aa82168e.chunk.js",
-    "main.js.map": "/ponto-ad/static/js/main.aa82168e.chunk.js.map",
+    "main.js": "/ponto-ad/static/js/main.1e1d3e55.chunk.js",
+    "main.js.map": "/ponto-ad/static/js/main.1e1d3e55.chunk.js.map",
     "runtime-main.js": "/ponto-ad/static/js/runtime-main.93a0a83a.js",
     "runtime-main.js.map": "/ponto-ad/static/js/runtime-main.93a0a83a.js.map",
-    "static/js/2.c60c6917.chunk.js": "/ponto-ad/static/js/2.c60c6917.chunk.js",
-    "static/js/2.c60c6917.chunk.js.map": "/ponto-ad/static/js/2.c60c6917.chunk.js.map",
+    "static/js/2.487b107e.chunk.js": "/ponto-ad/static/js/2.487b107e.chunk.js",
+    "static/js/2.487b107e.chunk.js.map": "/ponto-ad/static/js/2.487b107e.chunk.js.map",
     "index.html": "/ponto-ad/index.html",
-    "precache-manifest.ea35c4df11d61d60b34ae30ae85bdad6.js": "/ponto-ad/precache-manifest.ea35c4df11d61d60b34ae30ae85bdad6.js",
+    "precache-manifest.4b377b60a696282dde87113774a49a10.js": "/ponto-ad/precache-manifest.4b377b60a696282dde87113774a49a10.js",
     "service-worker.js": "/ponto-ad/service-worker.js",
-    "static/js/2.c60c6917.chunk.js.LICENSE.txt": "/ponto-ad/static/js/2.c60c6917.chunk.js.LICENSE.txt"
+    "static/js/2.487b107e.chunk.js.LICENSE.txt": "/ponto-ad/static/js/2.487b107e.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.93a0a83a.js",
-    "static/js/2.c60c6917.chunk.js",
-    "static/js/main.aa82168e.chunk.js"
+    "static/js/2.487b107e.chunk.js",
+    "static/js/main.1e1d3e55.chunk.js"
   ]
 }
