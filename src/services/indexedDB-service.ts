@@ -1,23 +1,37 @@
+import { DBSchema } from 'indexeddb';
 import { Note } from 'point-ad';
 
-let db: IDBDatabase, store: IDBObjectStore, request: IDBOpenDBRequest;
+let db: IDBDatabase, request: IDBOpenDBRequest;
 
-const createDB = () => {
+const createDB = (schema: DBSchema) => {
   db = request.result;
-  store = db.createObjectStore('notes', {
-    keyPath: 'id'
+
+  Object.keys(schema).forEach(storeName => {
+    const store = db.createObjectStore(storeName, {
+      keyPath: 'id'
+    });
+
+    Object.keys(schema[storeName]).forEach(columnName => {
+      store.createIndex(columnName, columnName, schema[storeName][columnName]);
+    });
   });
-  store.createIndex('user', 'user', { unique: false });
-  store.createIndex('date', 'date');
-  store.createIndex('note', 'note');
 };
 
 const PONTO_DB = 'ponto_db';
 const NOTES = 'notes';
 
+const schema: DBSchema = {
+  notes: {
+    user: { unique: false },
+    location: { unique: false },
+    note: { unique: false },
+    
+  }
+};
+
 export async function IndexedDB() {
   request = indexedDB.open(PONTO_DB);
-  request.onupgradeneeded = createDB;
+  request.onupgradeneeded = () => createDB(schema);
 
   await new Promise(resolve => {
     request.onsuccess = () => { 
