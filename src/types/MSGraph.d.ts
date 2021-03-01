@@ -18,4 +18,10 @@ declare module '@data/MSGraph' {
   type CalendarEvent = {
     
   }
+
+  type BatchResponse = {
+    photo: string;
+    messages: Message[];
+    events: CalendarEvent[];
+  }
 }

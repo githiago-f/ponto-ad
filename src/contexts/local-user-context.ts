@@ -1,8 +1,10 @@
 import { createContext, useEffect, useState } from 'react';
-import { CalendarEvent, Message } from '@data/MSGraph';
+import { BatchResponse, CalendarEvent, GraphResponse, Message } from '@data/MSGraph';
 import { graphConfig } from 'config';
-import { GraphService } from 'services/graph-service';
+import { GraphAPI } from 'services/graph-api';
 import { objectifyBatchResponse } from 'utils/objectifyBatchResponse';
+
+type GraphRes = {responses: GraphResponse[]}
 
 export const useLocalUserData = (token: string | undefined) => {
   const [messages, setMessages] = useState([] as Message[]);
@@ -15,13 +17,13 @@ export const useLocalUserData = (token: string | undefined) => {
         'Authorization': `Bearer ${token}`
       };
       const {url, body} = graphConfig.getUserInfos;
-      GraphService.post(url, body, {headers})
+      GraphAPI.post<GraphRes>(url, body, {headers})
         .then(({data, status}) => {
           if(status === 200) {
-            const response = objectifyBatchResponse(data.responses);
-            setPhoto(response.photo as string);
-            setMessages(response.messages as Message[]);
-            setEvents(response.events as CalendarEvent[]);
+            const response = objectifyBatchResponse<BatchResponse>(data.responses);
+            setPhoto(response.photo);
+            setMessages(response.messages);
+            setEvents(response.events);
           }
         })
         .catch(console.error);
@@ -37,6 +39,6 @@ export const useLocalUserData = (token: string | undefined) => {
 
 export const LocalUserContext = createContext({
   photo: '', 
-  events: [] as CalendarEvent[], 
-  messages: [] as Message[]
-});
+  events: [], 
+  messages: []
+} as BatchResponse);
