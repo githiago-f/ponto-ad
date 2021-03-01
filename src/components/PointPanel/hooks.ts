@@ -1,31 +1,27 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback } from 'react';
 import { IndexedDB } from 'services/indexedDB-service';
 
 export const usePointPanelHooks = () => {
-  const [notes, setNotes] = useState({});
-
-  useEffect(() => {
-    IndexedDB().then(db => {
-      db.getOne('user', 'Thiago Dutra')
-        .then(setNotes);
-    });
-  }, []);
-
-  useEffect(() => console.log(notes), [notes]);
-
   const addNote = useCallback(() => {
     IndexedDB().then(db => {
-      db.create({
-        id: 1,
-        user: 'Thiago Dutra',
-        date: new Date(),
-        note: 1
-      }).then(console.log);
+      if('geolocation' in navigator) {
+        navigator.geolocation.getCurrentPosition(position => {
+          const coords = position.coords;
+          db.create({
+            date: new Date(),
+            note: 1,
+            location: {
+              lat: coords.latitude,
+              lng: coords.longitude
+            }
+          }).then(console.log)
+            .catch(console.error);
+        });
+      }
     });
   }, []);
 
   return {
-    notes,
     addNote
   };
 };

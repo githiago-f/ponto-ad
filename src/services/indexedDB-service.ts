@@ -1,37 +1,25 @@
-import { DBSchema } from 'indexeddb';
 import { Note } from 'point-ad';
 
 let db: IDBDatabase, request: IDBOpenDBRequest;
 
-const createDB = (schema: DBSchema) => {
-  db = request.result;
-
-  Object.keys(schema).forEach(storeName => {
-    const store = db.createObjectStore(storeName, {
-      keyPath: 'id'
-    });
-
-    Object.keys(schema[storeName]).forEach(columnName => {
-      store.createIndex(columnName, columnName, schema[storeName][columnName]);
-    });
-  });
-};
-
 const PONTO_DB = 'ponto_db';
 const NOTES = 'notes';
 
-const schema: DBSchema = {
-  notes: {
-    user: { unique: false },
-    location: { unique: false },
-    note: { unique: false },
-    
-  }
+const createDB = () => {
+  db = request.result;
+  const store = db.createObjectStore(NOTES, { 
+    keyPath: 'id', 
+    autoIncrement: true 
+  });
+
+  store.createIndex('date', 'date');
+  store.createIndex('location', 'location');
+  store.createIndex('note', 'note');
 };
 
 export async function IndexedDB() {
   request = indexedDB.open(PONTO_DB);
-  request.onupgradeneeded = () => createDB(schema);
+  request.onupgradeneeded = () => createDB();
 
   await new Promise(resolve => {
     request.onsuccess = () => { 
@@ -59,6 +47,15 @@ export async function IndexedDB() {
     });
   }
 
+  function getAll(query?: string): Promise<Note[]> {
+    const notes = readStore().getAll(query);
+    return new Promise((resolve) => {
+      notes.onsuccess = function() {
+        resolve(notes.result as Note[]);
+      };
+    });
+  }
+
   function create(note: Note): Promise<IDBValidKey> {
     const req = writeStore().put(note);
     return new Promise(resolve => {
@@ -71,6 +68,7 @@ export async function IndexedDB() {
   return {
     getOne,
     readStore,
-    create
+    create,
+    getAll
   };
 }

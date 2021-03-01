@@ -1,8 +1,13 @@
 declare module 'point-ad' {
+  type GeoPoint = { 
+    lat: number; 
+    lng: number; 
+  };
+
   type Note = {
-    user: string;
     date: Date;
     note: number;
-    id: number;
+    location: GeoPoint;
+    id?: number;
   }
 }
