@@ -1,5 +1,3 @@
-import { Note } from 'point-ad';
-
 let db: IDBDatabase, request: IDBOpenDBRequest;
 
 const PONTO_DB = 'ponto_db';
@@ -21,7 +19,10 @@ export async function IndexedDB() {
   request = indexedDB.open(PONTO_DB);
   request.onupgradeneeded = () => createDB();
 
-  await new Promise(resolve => {
+  await new Promise((resolve, reject) => {
+    request.onerror = function() {
+      reject(this.error);
+    };
     request.onsuccess = () => { 
       db = request.result;
       resolve(db);
@@ -38,29 +39,38 @@ export async function IndexedDB() {
     return ctx.objectStore(storeName);
   }
 
-  function getOne(field: string, value: string): Promise<Note> {
+  function getOne<T>(field: string, value: string): Promise<T> {
     const query = readStore()?.index(field).get(value);
-    return new Promise(resolve => {
+    return new Promise((resolve, reject) => {
       query.onsuccess = function() {
         resolve(this.result);
       };
-    });
-  }
-
-  function getAll(query?: string): Promise<Note[]> {
-    const notes = readStore().getAll(query);
-    return new Promise((resolve) => {
-      notes.onsuccess = function() {
-        resolve(notes.result as Note[]);
+      query.onerror = function() {
+        reject(this.error);
       };
     });
   }
 
-  function create(note: Note): Promise<IDBValidKey> {
-    const req = writeStore().put(note);
-    return new Promise(resolve => {
-      req.onsuccess = () => {
-        resolve(req.result);
+  function getAll<T>(query?: string): Promise<T[]> {
+    const readRequest = readStore().getAll(query);
+    return new Promise((resolve, reject) => {
+      readRequest.onsuccess = function() {
+        resolve(readRequest.result as T[]);
+      };
+      readRequest.onerror = function() {
+        reject(this.error);
+      };
+    });
+  }
+
+  function create<T>(entity: T): Promise<IDBValidKey> {
+    const writeRequest = writeStore().put(entity);
+    return new Promise((resolve, reject) => {
+      writeRequest.onsuccess = function() {
+        resolve(writeRequest.result);
+      };
+      writeRequest.onerror = function() {
+        reject(this.error);
       };
     });
   }

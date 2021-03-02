@@ -7,11 +7,13 @@ export const usePointListHooks = () => {
   const [notes, setNotes] = useState([] as Note[]);
 
   useEffect(() => {
-    IndexedDB().then(db => {
-      db.getAll()
-        .then(setNotes)
-        .catch(console.error);
-    });
+    IndexedDB()
+      .then(db => {
+        db.getAll<Note>()
+          .then(setNotes)
+          .catch(console.error);
+      })
+      .catch(console.error);
   }, []);
 
   const formatList = useCallback((note: Note) => {
