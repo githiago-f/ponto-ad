@@ -24,7 +24,7 @@ export const ControlPanel = styled.div`
   width: 100%;
 `;
 
-export const TimerSubtitle = styled.p`
+export const TimerSubtitle = styled.h2`
   color: #007bce;
 `;
 

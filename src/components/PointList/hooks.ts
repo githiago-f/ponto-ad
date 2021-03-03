@@ -1,7 +1,7 @@
 import dayjs from 'dayjs';
 import { Note } from 'point-ad';
 import { useCallback, useEffect, useState } from 'react';
-import { IndexedDB } from 'services/indexedDB-service';
+import { IndexedDB } from 'utils/indexedDB';
 
 export const usePointListHooks = () => {
   const [notes, setNotes] = useState([] as Note[]);

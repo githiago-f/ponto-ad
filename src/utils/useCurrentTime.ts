@@ -6,8 +6,7 @@ export const useCurrentTime = () => {
 
   useEffect(() => {
     setInterval(() => {
-      const formattedDate = dayjs()
-        .format('DD/MM/YYYY HH:mm:ss');
+      const formattedDate = dayjs().format('DD/MM/YYYY HH:mm:ss');
       setTime(formattedDate);
     }, 1000);
   }, []);

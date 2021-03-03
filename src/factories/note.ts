@@ -14,6 +14,7 @@ export const createNote = (noteType: number): Promise<Note> => {
           }
         });
       });
+      return;
     }
     reject(new Error('Sem permissão para acessar a localização'));
   });

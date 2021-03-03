@@ -1,3 +1,5 @@
+import { IndexedDBResult } from 'indexeddb';
+
 let db: IDBDatabase, request: IDBOpenDBRequest;
 
 const PONTO_DB = 'ponto_db';
@@ -15,7 +17,7 @@ const createDB = () => {
   store.createIndex('note', 'note');
 };
 
-export async function IndexedDB() {
+export async function IndexedDB(): Promise<IndexedDBResult> {
   request = indexedDB.open(PONTO_DB);
   request.onupgradeneeded = () => createDB();
 
@@ -78,6 +80,7 @@ export async function IndexedDB() {
   return {
     getOne,
     readStore,
+    writeStore,
     create,
     getAll
   };

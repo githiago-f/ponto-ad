@@ -6,18 +6,15 @@ import { usePointPanelHooks } from './hooks';
 
 export const PointPanel = () => {
   const { currentTime } = useCurrentTime();
-  const { addNote } = usePointPanelHooks();
+  const { addNote, noteNum } = usePointPanelHooks();
 
   return (
     <Panel className="ms-depth-8">
       <MapPanelWrapper>
         <MapPanel>
-          {
-            //mapa
-          }
         </MapPanel>
         <ControlPanel>
-          <TimerSubtitle>Entrada $horario</TimerSubtitle>
+          <TimerSubtitle>Entrada {noteNum}</TimerSubtitle>
           <TimerTitle>{currentTime}</TimerTitle>
         </ControlPanel>
       </MapPanelWrapper>

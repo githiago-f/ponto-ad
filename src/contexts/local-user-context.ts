@@ -1,7 +1,7 @@
 import { createContext, useEffect, useState } from 'react';
 import { BatchResponse, CalendarEvent, GraphResponse, Message } from '@data/MSGraph';
 import { graphConfig } from 'config';
-import { GraphAPI } from 'services/graph-api';
+import { GraphAPI } from 'api/graph-api';
 import { objectifyBatchResponse } from 'utils/objectifyBatchResponse';
 
 type GraphRes = {responses: GraphResponse[]}

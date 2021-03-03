@@ -1,22 +1,40 @@
 import { createNote } from 'factories/note';
+import { IndexedDBResult } from 'indexeddb';
 import { Note } from 'point-ad';
-import { useCallback } from 'react';
-import { IndexedDB } from 'services/indexedDB-service';
+import { useCallback, useEffect, useState } from 'react';
+import { IndexedDB } from 'utils/indexedDB';
 
 export const usePointPanelHooks = () => {
+  const [db, setDb] = useState(undefined as undefined | IndexedDBResult);
+  const [noteNum, setNote] = useState(1);
+
+  useEffect(() => {
+    const today = new Date().getDate();
+    const filterByDate = (i: Note) => i.date.getDate() === today;
+    IndexedDB()
+      .then(async db => {
+        setDb(db);
+        const byDate = await db.getAll<Note>();
+        const count = byDate.filter(filterByDate).length + 1;
+        setNote(count);
+      })
+      .catch(console.error);
+  }, []);
+
   const addNote = useCallback(() => {
-    IndexedDB().then(db => {
-      createNote(2)
+    if(db) {
+      createNote(noteNum)
         .then(note => {
           db.create<Note>(note)
-            .then(console.log)
+            .then(() => setNote(noteNum+1))
             .catch(console.error);
         })
         .catch(console.error);
-    });
-  }, []);
+    }
+  }, [db, noteNum]);
 
   return {
-    addNote
+    addNote,
+    noteNum
   };
 };
