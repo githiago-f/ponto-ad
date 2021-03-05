@@ -1,3 +1,4 @@
+import dayjs from 'dayjs';
 import { createNote } from 'factories/note';
 import { IndexedDBResult } from 'indexeddb';
 import { Note } from 'point-ad';
@@ -9,14 +10,19 @@ export const usePointPanelHooks = () => {
   const [noteNum, setNote] = useState(1);
 
   useEffect(() => {
-    const today = new Date().getDate();
-    const filterByDate = (i: Note) => i.date.getDate() === today;
     IndexedDB()
       .then(async db => {
         setDb(db);
-        const byDate = await db.getAll<Note>();
-        const count = byDate.filter(filterByDate).length + 1;
-        setNote(count);
+        const keyRange = IDBKeyRange.bound(
+          dayjs().set('h', 0).set('m', 0).set('s', 0).toDate(), 
+          dayjs().toDate(), 
+          false, 
+          true
+        );
+        db.getBy<Note>('date', keyRange).then(entriesToday => {
+          const count = entriesToday.length + 1;
+          setNote(count);
+        });
       })
       .catch(console.error);
   }, []);

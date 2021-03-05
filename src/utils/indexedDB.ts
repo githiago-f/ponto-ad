@@ -41,8 +41,8 @@ export async function IndexedDB(): Promise<IndexedDBResult> {
     return ctx.objectStore(storeName);
   }
 
-  function getOne<T>(field: string, value: string): Promise<T> {
-    const query = readStore()?.index(field).get(value);
+  function getBy<T>(field: string, value: IDBKeyRange): Promise<T[]> {
+    const query = readStore()?.index(field).getAll(value);
     return new Promise((resolve, reject) => {
       query.onsuccess = function() {
         resolve(this.result);
@@ -53,14 +53,14 @@ export async function IndexedDB(): Promise<IndexedDBResult> {
     });
   }
 
-  function getAll<T>(query?: string): Promise<T[]> {
-    const readRequest = readStore().getAll(query);
+  function deleteById(id: number) {
+    const deleteIt = writeStore().delete(id);
     return new Promise((resolve, reject) => {
-      readRequest.onsuccess = function() {
-        resolve(readRequest.result as T[]);
+      deleteIt.onsuccess = () => {
+        resolve(deleteIt.result);
       };
-      readRequest.onerror = function() {
-        reject(this.error);
+      deleteIt.onerror = () => {
+        reject(deleteIt.error);
       };
     });
   }
@@ -78,10 +78,10 @@ export async function IndexedDB(): Promise<IndexedDBResult> {
   }
 
   return {
-    getOne,
+    getBy,
     readStore,
     writeStore,
     create,
-    getAll
+    deleteById
   };
 }
